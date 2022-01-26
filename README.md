@@ -3,15 +3,19 @@ Klipper config for Creality Ender 3 V2
 
 Tweaked to suit printer & my needs.
 
+26/Jan/2022 - NOT WORKING - migrating to new mboard & mainsail
+
 # Hardware
 - Creality Ender 3 V2
 - CR Touch
 - Hemera Direct Drive
+- Dual Z screw after installing heavyweight Hemera
+- BTT SKR 2
 - a vast array of M3 screws, bolts, washers, fans, wire, crimpers, JST/Dupont fittings, heat shrink covers and solder to patch things together.
 
 ## Build
-TODO:
-- Dual Z screw after installing heavyweight Hemera
+2022-01-26
+- WIP - migrating to BTT SKR2 & Mainsail (from stock & octopi `./octopi`)
 
 2022-01-01
 - Hemera Direct Drive upgrade
@@ -42,3 +46,6 @@ Started using Cura, moved to Prusaslicer v2.4+ for finer control.
 Fusion 360 for STL mods
 
 - Prusaslicer bug where "Gap Speed">0 breaks all Auto Volume speeds. Appears when you try and use Volumetric Speed and no changes occur. https://github.com/prusa3d/PrusaSlicer/issues/6844
+
+# Archive
+Octopi original config in sub-dir `./octopi`
