@@ -3,18 +3,50 @@ Klipper config for Creality Ender 3 V2
 
 Tweaked to suit printer & my needs.
 
-26/Jan/2022 - NOT WORKING - migrating to new SKR board & mainsail
+# Shopping List
 
-# Hardware
+## Main parts
+- Creality Ender 3 V2 - https://amzn.to/3AKjhfT
+- E3D Hemera 24v - https://amzn.to/34miju6
+- E3D Hemera metal backplate - https://amzn.to/3uasRaJ
+- CR Touch - https://amzn.to/3KRwpEJ
+- Dual Z-axis Upgrade Kit - https://amzn.to/34mhlhs
+- BIGTREETECH SKR 2 Motherboard with 5x TMC2209 - https://amzn.to/3AMYY1j
+- Bed compression springs - https://amzn.to/3KWfjp6
+- 4010 Noctua 12v fan (2 of) - https://amzn.to/3geOgHz
+- 92mm Noctua 12v fan (2 of) - https://amzn.to/3uf4ngr
+- 5015 24v blower fans - https://amzn.to/3HbUYd8
+
+## Filaments
+- eSun PLA+ - https://amzn.to/3AKjHmt
+- Hatchbox PETG - https://amzn.to/3IRHpjv
+- Evyone PETG (Hatchbox is better) - https://amzn.to/3reZgLp
+- Creality PLA (eSun PLA+ is better) - https://amzn.to/3HjlEbX
+
+## Extras
+- JST Connector kit - https://amzn.to/3KXofdX
+- Washers - https://amzn.to/3gdb8as
+- 26AWG Wire - https://amzn.to/3g7UTvj
+- M3 bolts & nuts (big size range) - https://amzn.to/3AJkGmS
+- M3 square nuts - https://amzn.to/32JmUGe
+- M2-2.5 screws - https://amzn.to/34q0Wc1
+- M3-M5 bolts & nuts - https://amzn.to/34o6vHD
+- Dupont pins & crimper - https://amzn.to/3AJGK0C
+- Buck converters - https://amzn.to/3odvViq
+- Heat shrink tubing - https://amzn.to/345HEsy
+- Tie wraps - https://amzn.to/3IO6yeU
+
+# Build
+2022-01-30
+All working config for
 - Creality Ender 3 V2
+- BigTreeTech SKR 2 - klipper
+- Raspberry Pi Zero 2 W (with colour coded header) with GPIO & +5v from SKR
+- Mainsail
 - CR Touch
-- Raspberry Pi 3B - klipper & mainsail
-- Hemera Direct Drive
-- Dual Z screw after installing heavyweight Hemera
-- BTT SKR 2 - klipper
-- a vast array of M3 screws, bolts, washers, fans, wire, crimpers, JST/Dupont fittings, heat shrink covers and solder to patch things together.
+- Hemera Direct Drive Extruder
+- Dual Z screw after installing heavyweight Hemera - cable splitter and ONE connection to board. To be split later.
 
-## Build
 2022-01-26
 - WIP - migrating to BTT SKR2 & Mainsail (from stock & octopi `./octopi`)
 
@@ -24,10 +56,10 @@ Tweaked to suit printer & my needs.
 2022-01-01
 - Hemera Direct Drive upgrade
 - Noctua 4010+Buck on Hemera after I caught the stock Hemera fan and snapped a blade :'(
-- Swapped to Hemera metal backplate from Amazon as the printed one had flex despite ribs & 85% fill. Metal backplate isn't great but it's rigid.
-- Provided Hemera thermistor and heat cables are too short when the extruder is at X=max,Y=min,Z=max for a reasonable run into the controller board so had to hack the covers and ultimately bring those cables around the side. Still short but it _just_ works.
+- Swapped to Hemera metal backplate from Amazon as the printed one had flex despite ribs & 85% fill. The metal backplate isn't great but it's rigid.
+- Provided Hemera thermistor and heat cables are too short when the extruder is at X=max, Y=min, Z=max for a reasonable run into the controller board so had to hack the covers and ultimately bring those cables around the side. Still short but it _just_ works.
 
-Hemera: Printed backplate, fan duct and attachments
+Hemera: Printed backplate, fan duct, and attachments
 
 2021-12-01
 - Replaced all fans with Noctua variants and buck converters to reduce noise. CPU cover, PSU cover, "Briss moto" cooling w/ 2x Noctua 4010 and riser feet
@@ -37,7 +69,7 @@ Hemera: Printed backplate, fan duct and attachments
 You will need a wide selection of M3 bolts, nuts & washers from 5mm up to 22mm
 Be prepared for electronics, wiring, soldering, etc.
 Most online guides/videos are made by people with multiple printers so they can print parts if required during the build. If, like most people, you have 1 printer then test everything before you touch your working printer.
-I printed various backplates, ducts, connectors, adapters and test fitted them all to the Hemera before I actually dismanteled the printer and rebuilt.
+I printed various backplates, ducts, connectors, adapters, and test-fitted them all to the Hemera before I actually dismantled the printer and rebuilt it.
 
 Things of note
 - X-end stop hitting various backplates during Hemera required mods to those
@@ -45,7 +77,7 @@ Things of note
 
 ### Hemera retraction
 Retraction 0.3mm at 45mm retract, 25mm detract. 
-BEWARE that if youre detract speed is too high, you get gaps on the model exactly where the "detraction"s are shown in Prusaslicer.
+BEWARE that if your detract speed is too high, you get gaps on the model exactly where the "detraction"s are shown in Prusaslicer.
 
 # Software
 Started using Cura, moved to Prusaslicer v2.4+ for finer control.
@@ -61,10 +93,10 @@ Board does not fit inside 1 side of the under-carriage so dedicated left & right
 The USB-A cable protrudes a long way, so take that into account.
 
 ## Stepper End stops
-SKR has 3-pin stops where the Stock has 2-pin stops. Inside the 3-pin male, push the 2-pin female in at end away from the steppers. I used side-cutters to strip the tiny outer alignment shims to get a good fit without spraining the board.
+SKR has 3-pin stops whereas the Stock has 2-pin stops. Inside the 3-pin male, push the 2-pin female in at the end away from the steppers. I used side-cutters to strip the tiny outer alignment shims to get a good fit without spraining the board.
 
 ## CR Touch
-CR Touch wiring, VERY different to BL Touch. Be careful!! Pretty much reversed!!
+CR Touch wiring, VERY different from BL Touch. Be careful!! Pretty much reversed!!
 
 Split the 5-wire female JST into a 3 & 2. I carefully retracted the pins from the 5-block and pushed them into 2 new blocks as below
 
@@ -92,16 +124,16 @@ Blue	OUT               PB1 SIG   PE4
 
 
 ## Steppers
-When installing, needs the X stepper direction inverting from stock config by putting a `!` at the start of the klipper config.
+When installing, needs the X stepper direction inverting from stock config by putting a `!` at the start of the Klipper config.
 `dir_pin: !PE1 ; this is inverted with the "!" from the stock board`
 Make sure the config has the appropriate tmc2209 blocks are the distance will be wrong
 e.g., `[tmc2209 stepper_x]`
 
 ## Raspberry PI
 ref: https://www.reddit.com/r/3Dprinting/comments/n73s1j/pi_zero_w_klipper_fluidd_mainsail_guide_skr_mini/
-YMMW: Don't use this literally but as a general guide, config changes required.
+YMMW: Don't use this literally but as a general guide, config changes are required.
 
-Connect RPI via GPIO to remove need for massive USB-A cable
+Connect RPI via GPIO to remove the need for a massive USB-A cable
 
 (@RPi) GP6  => (@SKR - TFT) GND, 2nd pin from left (steppers at top)
 (@RPi) GP10 => (@SKR - TFT) PA9, TFT 3rd pin from left (middle)
@@ -115,9 +147,15 @@ GP8 - white - pin 4
 https://github.com/bigtreetech/SKR-2/issues/13#issuecomment-831507297
 
 ```
-On SKR-2 PA9 is TX and PA10 is RX. So pin 10 (RXD0) of RPi would go to the middle pin (PA9) of tft connector on SKR-2 and pin 8 (TXD0)of RPI would go to the 4th pin from left (PA10) on tft connector. And then or course, pick any ground pin on rpi and connect to second pin over from left (GND) on SKR-2.
+On SKR-2 PA9 is TX and PA10 is RX. So pin 10 (RXD0) of RPi would go to the middle pin (PA9) of TFT connector on SKR-2 and pin 8 (TXD0)of RPI would go to the 4th pin from left (PA10) on tft connector. And then or course, pick any ground pin on rpi and connect to second pin over from left (GND) on SKR-2.
 ```
+
+For my setup, RPI Zero 2, only connected over `/dev/serial0` as the documented `/dev/ttyAMA0` did not work at all for me.
 
 
 # Archive
 Octopi original config in sub-dir `./octopi`
+- Raspberry Pi 3B - Klipper & mainsail. Moved to RPI Zero 2 to save a lot of space!
+
+
+
