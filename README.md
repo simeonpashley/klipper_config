@@ -164,6 +164,18 @@ On SKR-2 PA9 is TX and PA10 is RX. So pin 10 (RXD0) of RPi would go to the middl
 
 For my setup, RPI Zero 2, only connected over `/dev/serial0` as the documented `/dev/ttyAMA0` did not work at all for me.
 
+# Reference
+
+- Teaching Tech 3D Printer Calibration - https://teachingtechyt.github.io/calibration.html
+
+Great reference for initial setup
+
+- AndrewEllis93/Print-Tuning-Guide - https://github.com/AndrewEllis93/Print-Tuning-Guide 
+
+Detailed setup for pressure advance and klipper specific elements.
+
+
+- Older setup guide, still relevant - https://old.reddit.com/r/ender3/comments/ec2i9j/how_to_calibrate_your_printers_esteps_and/
 
 # Archive
 
