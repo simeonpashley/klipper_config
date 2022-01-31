@@ -104,28 +104,37 @@ Split the 5-wire female JST into a 3 & 2. I carefully retracted the pins from th
 https://www.reddit.com/r/BIGTREETECH/comments/pjrkj2/crtouch_wiring_for_btt_skr_v14_and_skr_v2/
 
 https://www.reddit.com/r/Creality/comments/pl4fyv/creality_cr_touch_wiring_diagrampinout/
+
+```
 [ blu | red | yel | blk | wht ]
 [  G  |  V  | IN  | G   | OUT ]
+```
 
 Reminder graphic here: https://imgur.com/a/39DU1cv
 
 ### Creality board 5-pin JST block
+
+```
 COLOUR	stock board label PIN       SKR
 White	G                 GND       GND
 Black	V                 +5V       +5V
 Yellow	IN                PB0 SIG   PE5
 Red 	G                 GND       GND
 Blue	OUT               PB1 SIG   PE4
+```
 
 ### SKR JST blocks
+
+```
    3-pin sensor     ~ 2-pin probe
 [ wht | blk | yel ] ~ [ red | blu ]
 [ GND | +5V | PE5 ] ~ [ GND | PE4 ]
-
+```
 
 ## Steppers
 When installing, needs the X stepper direction inverting from stock config by putting a `!` at the start of the Klipper config.
 `dir_pin: !PE1 ; this is inverted with the "!" from the stock board`
+
 Make sure the config has the appropriate tmc2209 blocks are the distance will be wrong
 e.g., `[tmc2209 stepper_x]`
 
@@ -140,9 +149,12 @@ Connect RPI via GPIO to remove the need for a massive USB-A cable
 (@RPi) GP8  => (@SKR - TFT) PA10, 4th pin from left
 
 My wiring
+
+```
 GP6 - black - pin 2
 GP10 - gray - pin 3
 GP8 - white - pin 4
+```
 
 https://github.com/bigtreetech/SKR-2/issues/13#issuecomment-831507297
 
@@ -154,7 +166,9 @@ For my setup, RPI Zero 2, only connected over `/dev/serial0` as the documented `
 
 
 # Archive
+
 Octopi original config in sub-dir `./octopi`
+
 - Raspberry Pi 3B - Klipper & mainsail. Moved to RPI Zero 2 to save a lot of space!
 
 
