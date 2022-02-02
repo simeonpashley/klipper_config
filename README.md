@@ -37,6 +37,10 @@ Tweaked to suit printer & my needs.
 - Tie wraps - https://amzn.to/3IO6yeU
 
 # Build
+2022-02-01
+- Dual Z screw split into 2 cables - "z" for left/stock & "z1" for right screw. Attached to E1 port on SKR
+- Config for dual z `Z_TILT`, run_currents, etc.
+
 2022-01-30
 All working config for
 - Creality Ender 3 V2
@@ -76,7 +80,7 @@ Things of note
 - Most backplates are built for BL Touch
 
 ### Hemera retraction
-Retraction 0.3mm at 45mm retract, 25mm detract. 
+Retraction 0.3mm at 45mm retract, 25mm detract.
 BEWARE that if your detract speed is too high, you get gaps on the model exactly where the "detraction"s are shown in Prusaslicer.
 
 # Software
@@ -85,18 +89,24 @@ Fusion 360 for STL mods
 
 - Prusaslicer bug where "Gap Speed">0 breaks all Auto Volume speeds. Appears when you try and use Volumetric Speed and no changes occur. https://github.com/prusa3d/PrusaSlicer/issues/6844
 
-
 # BTT SKR V2
 w/ 5 x tmc2209
 
 Board does not fit inside 1 side of the under-carriage so dedicated left & right carriages are required to host it.
-The USB-A cable protrudes a long way, so take that into account.
+The USB-A cable protrudes a long way, so take that into account. A rPI connected via GPIO will save a lot of space and negate the need for the USB.
+
+For klipper, go through the checks carefully.
+https://www.klipper3d.org/Config_checks.html
+
+Especially, `STEPPER_BUZZ` command will save a lot of grinding and things going in the wrong direction. e.g., `STEPPER_BUZZ STEPPER=stepper_x`
+
+For me, the `[tmc2209 stepper_???]` sections were important as without them the steppers ran the wrong distances.
 
 ## Stepper End stops
 SKR has 3-pin stops whereas the Stock has 2-pin stops. Inside the 3-pin male, push the 2-pin female in at the end away from the steppers. I used side-cutters to strip the tiny outer alignment shims to get a good fit without spraining the board.
 
 ## CR Touch
-CR Touch wiring, VERY different from BL Touch. Be careful!! Pretty much reversed!!
+CR Touch wiring, VERY different from BL Touch. **Be careful!! Pretty much reversed!! I fried a CR touch with the wrong wiring!!!**
 
 Split the 5-wire female JST into a 3 & 2. I carefully retracted the pins from the 5-block and pushed them into 2 new blocks as below
 
@@ -105,34 +115,29 @@ https://www.reddit.com/r/BIGTREETECH/comments/pjrkj2/crtouch_wiring_for_btt_skr_
 
 https://www.reddit.com/r/Creality/comments/pl4fyv/creality_cr_touch_wiring_diagrampinout/
 
-```
-[ blu | red | yel | blk | wht ]
-[  G  |  V  | IN  | G   | OUT ]
-```
-
 Reminder graphic here: https://imgur.com/a/39DU1cv
 
 ### Creality board 5-pin JST block
 
-```
-COLOUR	stock board label PIN       SKR
-White	G                 GND       GND
-Black	V                 +5V       +5V
-Yellow	IN                PB0 SIG   PE5
-Red 	G                 GND       GND
-Blue	OUT               PB1 SIG   PE4
-```
+|COLOUR |stock board label |PIN |SKR |
+--- | --- | ---| ---|
+|White |G |GND |GND |
+|Black |V |+5V |+5V |
+|Yellow |IN |PB0 SIG |PE5 |
+|Red |G |GND |GND |
+|Blue	|OUT |PB1 SIG |PE4 |
 
 ### SKR JST blocks
 
-```
    3-pin sensor     ~ 2-pin probe
-[ wht | blk | yel ] ~ [ red | blu ]
-[ GND | +5V | PE5 ] ~ [ GND | PE4 ]
-```
+   |3A |3B |3C |~ |2A |2B |
+--- | --- | ---| ---| ---| ---|
+|wht |blk |yel |~ |red |blu |
+|GND |+5V |PE5 |~ |GND |PE4 |
 
 ## Steppers
 When installing, needs the X stepper direction inverting from stock config by putting a `!` at the start of the Klipper config.
+
 `dir_pin: !PE1 ; this is inverted with the "!" from the stock board`
 
 Make sure the config has the appropriate tmc2209 blocks are the distance will be wrong
@@ -150,11 +155,12 @@ Connect RPI via GPIO to remove the need for a massive USB-A cable
 
 My wiring
 
-```
-GP6 - black - pin 2
-GP10 - gray - pin 3
-GP8 - white - pin 4
-```
+|rpi |colour| skr|
+| ---| ---| ---|
+|GP6 |black| pin 2|
+|GP10 |gray| pin 3|
+|GP8 |white| pin 4|
+
 
 https://github.com/bigtreetech/SKR-2/issues/13#issuecomment-831507297
 
@@ -164,13 +170,15 @@ On SKR-2 PA9 is TX and PA10 is RX. So pin 10 (RXD0) of RPi would go to the middl
 
 For my setup, RPI Zero 2, only connected over `/dev/serial0` as the documented `/dev/ttyAMA0` did not work at all for me.
 
+I used `minicom -h -D /dev/serial0` on the rpi to verify data was being received from the SKR, assuming it was periodic temperature information.
+
 # Reference
 
 - Teaching Tech 3D Printer Calibration - https://teachingtechyt.github.io/calibration.html
 
 Great reference for initial setup
 
-- AndrewEllis93/Print-Tuning-Guide - https://github.com/AndrewEllis93/Print-Tuning-Guide 
+- AndrewEllis93/Print-Tuning-Guide - https://github.com/AndrewEllis93/Print-Tuning-Guide
 
 Detailed setup for pressure advance and klipper specific elements.
 
