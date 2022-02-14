@@ -37,6 +37,9 @@ Tweaked to suit printer & my needs.
 - Tie wraps - https://amzn.to/3IO6yeU
 
 # Build
+2022-02-05
+- Published current mounts at Thingverse https://www.thingiverse.com/thing:5233293
+
 2022-02-01
 - Dual Z screw split into 2 cables - "z" for left/stock & "z1" for right screw. Attached to E1 port on SKR
 - Config for dual z `Z_TILT`, run_currents, etc.
