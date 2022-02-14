@@ -17,6 +17,13 @@ Tweaked to suit printer & my needs.
 - 92mm Noctua 12v fan (2 of) - https://amzn.to/3uf4ngr
 - 5015 24v blower fans - https://amzn.to/3HbUYd8
 
+### Rasberry Pi - for Klipper
+- Raspberry Pi Zero 2 W - https://amzn.to/34IaNKx
+
+Bonus: Camera for remote monitoring via Mainsail
+- Raspberry Pi Camera v2 - https://amzn.to/3LJbmVp
+- Raspberry Pi Camera to Zero cable - https://amzn.to/3gGJZwI
+
 ## Filaments
 - eSun PLA+ - https://amzn.to/3AKjHmt
 - Hatchbox PETG - https://amzn.to/3IRHpjv
@@ -24,9 +31,13 @@ Tweaked to suit printer & my needs.
 - Creality PLA (eSun PLA+ is better) - https://amzn.to/3HjlEbX
 
 ## Extras
+- iFixit Precision toolset - https://amzn.to/34U2bAv
+- ADXL345 - used for resonance/ringing/ghosting - https://amzn.to/34x5iP3
 - JST Connector kit - https://amzn.to/3KXofdX
 - Washers - https://amzn.to/3gdb8as
-- 26AWG Wire - https://amzn.to/3g7UTvj
+- 20 AWG wire - https://amzn.to/3I49tAp
+- 24 AWG wire - https://amzn.to/3oLxzIs
+- 26 AWG Wire - https://amzn.to/3g7UTvj
 - M3 bolts & nuts (big size range) - https://amzn.to/3AJkGmS
 - M3 square nuts - https://amzn.to/32JmUGe
 - M2-2.5 screws - https://amzn.to/34q0Wc1
@@ -35,10 +46,22 @@ Tweaked to suit printer & my needs.
 - Buck converters - https://amzn.to/3odvViq
 - Heat shrink tubing - https://amzn.to/345HEsy
 - Tie wraps - https://amzn.to/3IO6yeU
+- Wowstick - https://amzn.to/3LtoMEG
+- Craft knife set - https://amzn.to/3oOmmXv
+- Tweezer set - https://amzn.to/3603w9d
+- Wire strippers - https://amzn.to/3GORI6D
+- Side cutters - https://amzn.to/3HQKIXZ
+- Hex / Allen key set - https://amzn.to/3Bgzmu4
+- Isopropyl Alcohol - https://amzn.to/3LAubd1
+- 300mm steel rule - https://amzn.to/361sWTU
 
 # Build
+2022-02-12
+- Used [ADXL345](https://amzn.to/34x5iP3) to discover resonance/ringing/ghosting. Followed [this guide](https://www.klipper3d.org/Measuring_Resonances.html). [This mount](https://www.thingiverse.com/thing:4917510) for the X & Y, these ADXL345 https://amzn.to/34x5iP3
+
 2022-02-05
-- Published current mounts at Thingverse https://www.thingiverse.com/thing:5233293
+- Published current SKR2 & electronics front bay at Thingverse https://www.thingiverse.com/thing:5233293
+- Replaced short stepper cables with much longer 1.5m, a bit excessive but lots of room. https://amzn.to/3HQJFY3
 
 2022-02-01
 - Dual Z screw split into 2 cables - "z" for left/stock & "z1" for right screw. Attached to E1 port on SKR
@@ -71,7 +94,7 @@ Hemera: Printed backplate, fan duct, and attachments
 2021-12-01
 - Replaced all fans with Noctua variants and buck converters to reduce noise. CPU cover, PSU cover, "Briss moto" cooling w/ 2x Noctua 4010 and riser feet
 
-## Hemera install
+# Hemera install
 "Dry fit" all components & parts for complete Hemera install before I did it.
 You will need a wide selection of M3 bolts, nuts & washers from 5mm up to 22mm
 Be prepared for electronics, wiring, soldering, etc.
@@ -82,15 +105,9 @@ Things of note
 - X-end stop hitting various backplates during Hemera required mods to those
 - Most backplates are built for BL Touch
 
-### Hemera retraction
+## Hemera retraction
 Retraction 0.3mm at 45mm retract, 25mm detract.
 BEWARE that if your detract speed is too high, you get gaps on the model exactly where the "detraction"s are shown in Prusaslicer.
-
-# Software
-Started using Cura, moved to Prusaslicer v2.4+ for finer control.
-Fusion 360 for STL mods
-
-- Prusaslicer bug where "Gap Speed">0 breaks all Auto Volume speeds. Appears when you try and use Volumetric Speed and no changes occur. https://github.com/prusa3d/PrusaSlicer/issues/6844
 
 # BTT SKR V2
 w/ 5 x tmc2209
@@ -108,19 +125,19 @@ For me, the `[tmc2209 stepper_???]` sections were important as without them the 
 ## Stepper End stops
 SKR has 3-pin stops whereas the Stock has 2-pin stops. Inside the 3-pin male, push the 2-pin female in at the end away from the steppers. I used side-cutters to strip the tiny outer alignment shims to get a good fit without spraining the board.
 
-## CR Touch
+# CR Touch
 CR Touch wiring, VERY different from BL Touch. **Be careful!! Pretty much reversed!! I fried a CR touch with the wrong wiring!!!**
 
 Split the 5-wire female JST into a 3 & 2. I carefully retracted the pins from the 5-block and pushed them into 2 new blocks as below
 
-### CR touch - reference
+## CR touch - reference
 https://www.reddit.com/r/BIGTREETECH/comments/pjrkj2/crtouch_wiring_for_btt_skr_v14_and_skr_v2/
 
 https://www.reddit.com/r/Creality/comments/pl4fyv/creality_cr_touch_wiring_diagrampinout/
 
 Reminder graphic here: https://imgur.com/a/39DU1cv
 
-### Creality board 5-pin JST block
+## Creality board 5-pin JST block
 
 |COLOUR |stock board label |PIN |SKR |
 --- | --- | ---| ---|
@@ -130,7 +147,7 @@ Reminder graphic here: https://imgur.com/a/39DU1cv
 |Red |G |GND |GND |
 |Blue	|OUT |PB1 SIG |PE4 |
 
-### SKR JST blocks
+## SKR JST blocks
 
    3-pin sensor     ~ 2-pin probe
    |3A |3B |3C |~ |2A |2B |
@@ -138,32 +155,26 @@ Reminder graphic here: https://imgur.com/a/39DU1cv
 |wht |blk |yel |~ |red |blu |
 |GND |+5V |PE5 |~ |GND |PE4 |
 
-## Steppers
+# Steppers
 When installing, needs the X stepper direction inverting from stock config by putting a `!` at the start of the Klipper config.
 
 `dir_pin: !PE1 ; this is inverted with the "!" from the stock board`
 
-Make sure the config has the appropriate tmc2209 blocks are the distance will be wrong
+Make sure the config has the appropriate tmc2209 blocks or the distance will be wrong
 e.g., `[tmc2209 stepper_x]`
 
-## Raspberry PI
+# Raspberry PI
 ref: https://www.reddit.com/r/3Dprinting/comments/n73s1j/pi_zero_w_klipper_fluidd_mainsail_guide_skr_mini/
-YMMW: Don't use this literally but as a general guide, config changes are required.
+
+**YMMW: Don't use this literally but as a general guide, config changes are required.**
 
 Connect RPI via GPIO to remove the need for a massive USB-A cable
 
-(@RPi) GP6  => (@SKR - TFT) GND, 2nd pin from left (steppers at top)
-(@RPi) GP10 => (@SKR - TFT) PA9, TFT 3rd pin from left (middle)
-(@RPi) GP8  => (@SKR - TFT) PA10, 4th pin from left
-
-My wiring
-
-|rpi |colour| skr|
-| ---| ---| ---|
-|GP6 |black| pin 2|
-|GP10 |gray| pin 3|
-|GP8 |white| pin 4|
-
+|rPI |SKR TFT |SKR note |My color |
+| ---| ---| ---| ---|
+|GP6 |GND |_Pin 2 from left (steppers at top)_ |black |
+|GP10 |PA9 |_Pin 3 from left (middle)_ | gray|
+|GP8 |PA10 |_Pin 4 from left_ | white|
 
 https://github.com/bigtreetech/SKR-2/issues/13#issuecomment-831507297
 
@@ -187,6 +198,13 @@ Detailed setup for pressure advance and klipper specific elements.
 
 
 - Older setup guide, still relevant - https://old.reddit.com/r/ender3/comments/ec2i9j/how_to_calibrate_your_printers_esteps_and/
+
+
+# Software
+Started using Cura, moved to Prusaslicer v2.4+ for finer control.
+Fusion 360 for STL mods
+
+- Prusaslicer bug where "Gap Speed">0 breaks all Auto Volume speeds. Appears when you try and use Volumetric Speed and no changes occur. https://github.com/prusa3d/PrusaSlicer/issues/6844
 
 # Archive
 
