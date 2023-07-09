@@ -3,6 +3,8 @@ Klipper config for Creality Ender 3 V2
 
 Tweaked to suit printer & my needs.
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/N4N1HWGQ3)
+
 # Shopping List
 
 ## Main parts
